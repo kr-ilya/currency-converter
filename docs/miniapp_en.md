@@ -1,4 +1,4 @@
-# Frontend mini-apps
+# Frontend mini-app
 
 Frontend mini-applications (WebApp).
 
@@ -53,7 +53,7 @@ In the *head* tag in the file *index.html* it is necessary to connect the script
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 ```
 
-Application scripts interacting with Telegram should be connected **after** connection*telegram-web-app.js *.
+Application scripts interacting with Telegram should be connected **after** connection *telegram-web-app.js*.
 
 When initializing the application, you need to call the *ready() function* - A method that informs the Telegram application that the mini-application is ready to display. (presenter.js:10)
 

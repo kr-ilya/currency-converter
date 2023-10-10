@@ -4,7 +4,7 @@ The project allows you to find out the current exchange rates.
 
 🔸 Made on the basis of Telegram Mini App (Web App). 
 
-🔸 Currency exchange rates are updated once an hour. (Currency exchange rate provider: https://fixer.io /)
+🔸 Currency exchange rates are updated once an hour. (Currency exchange rate provider: https://fixer.io/)
 
 🔸 Localization: English, Russian 
 
