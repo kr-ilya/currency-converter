@@ -1,0 +1,75 @@
+version: '3'
+
+services:
+  bot:
+    container_name: bot
+    build:
+      context: ./bot
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "5"
+    env_file:
+      - ./config/bot.env
+    networks:
+      - app_nw
+  
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "5"
+    env_file:
+      - ./config/backend.env
+    depends_on:
+      - redis
+    networks:
+      - app_nw
+
+
+  redis:
+    container_name: redis
+    image: redis:7.0.5-alpine
+    restart: unless-stopped
+    command: redis-server /usr/local/etc/redis/redis.conf
+    volumes:
+      - ./data/redis:/data:rw
+      - ./config/redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    networks:
+      - app_nw
+
+  webapp:
+    container_name: webapp
+    restart: unless-stopped
+    build:
+      context: ./webapp
+      dockerfile: ./Dockerfile
+    networks:
+      - app_nw
+  
+  nginx-proxy:
+    image: nginx:1.25.2-alpine
+    container_name: nginx-proxy
+    restart: unless-stopped
+    volumes:
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - webapp
+      - backend
+      - bot
+    networks:
+      - app_nw
+
+networks:
+  app_nw:

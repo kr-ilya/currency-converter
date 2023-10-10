@@ -1,0 +1,31 @@
+{
+  "name": "currency-converter",
+  "version": "1.0.0",
+  "description": "Currency converter Telegram Mini App",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve --mode=development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kr-ilya/currency-converter.git"
+  },
+  "author": "kr-ilya",
+  "bugs": {
+    "url": "https://github.com/kr-ilya/currency-converter/issues"
+  },
+  "homepage": "https://github.com/kr-ilya/currency-converter#readme",
+  "devDependencies": {
+    "babel-loader": "^9.1.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.2",
+    "css-minimizer-webpack-plugin": "^4.2.2",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.2",
+    "terser-webpack-plugin": "^5.3.6",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.11.1"
+  }
+}
