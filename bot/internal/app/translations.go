@@ -26,7 +26,7 @@ func newI18n() *i18n {
 
 func (i *i18n) get(key string, lang string) string {
 	if _, ok := i.translations[key]; !ok {
-		return ""
+		return "Server error"
 	}
 
 	switch lang {
@@ -36,5 +36,5 @@ func (i *i18n) get(key string, lang string) string {
 		return i.translations[key].en
 	}
 
-	return ""
+	return i.translations[key].en
 }
