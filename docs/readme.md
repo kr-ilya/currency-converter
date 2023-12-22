@@ -1,141 +1,144 @@
-# Currency converter - Telegram Mini App
+# Конвертер валют - Telegram Mini App
 
-The project allows you to find out the current exchange rates. 
+[![docs EN](https://img.shields.io/badge/docs-EN-blue?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iMTIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgNjAgMzAiIGhlaWdodD0iNjAwIj4NCjxkZWZzPg0KPGNsaXBQYXRoIGlkPSJ0Ij4NCjxwYXRoIGQ9Im0zMCwxNWgzMHYxNXp2MTVoLTMwemgtMzB2LTE1enYtMTVoMzB6Ii8%2BDQo8L2NsaXBQYXRoPg0KPC9kZWZzPg0KPHBhdGggZmlsbD0iIzAwMjQ3ZCIgZD0ibTAsMHYzMGg2MHYtMzB6Ii8%2BDQo8cGF0aCBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iNiIgZD0ibTAsMGw2MCwzMG0wLTMwbC02MCwzMCIvPg0KPHBhdGggc3Ryb2tlPSIjY2YxNDJiIiBzdHJva2Utd2lkdGg9IjQiIGQ9Im0wLDBsNjAsMzBtMC0zMGwtNjAsMzAiIGNsaXAtcGF0aD0idXJsKCN0KSIvPg0KPHBhdGggc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEwIiBkPSJtMzAsMHYzMG0tMzAtMTVoNjAiLz4NCjxwYXRoIHN0cm9rZT0iI2NmMTQyYiIgc3Ryb2tlLXdpZHRoPSI2IiBkPSJtMzAsMHYzMG0tMzAtMTVoNjAiLz4NCjwvc3ZnPg0K)][docs_en]
 
-🔸 Made on the basis of Telegram Mini App (Web App). 
 
-🔸 Currency exchange rates are updated once an hour. (Currency exchange rate provider: https://fixer.io/)
+Проект позволяет узнать актуальные курсы валют.  
 
-🔸 Localization: English, Russian 
+🔸 Выполнен на базе Telegram Mini App (Web App).  
+
+🔸 Курсы валют обновляются раз в час. (Поставщик курсов валют: https://fixer.io/)  
+
+🔸 Локализация: Английский, Русский
 
 ![preview mini app][main_img]  
 
 
-## Description of services  
+## Описание сервисов  
 
-* **[Frontend Mini App][miniapp_docs]** (WebApp)
-* **[Backend Mini App][backend_docs]**
-* **[Backend bot][bot_docs]**
+* **[Frontend мини-приложения][miniapp_docs]** (WebApp)
+* **[Backend мини-приложения][backend_docs]**
+* **[Backend бота][bot_docs]**
 
-## Project structure 
+## Структура проекта  
 
-The project consists of three main services, each of which is located in the corresponding folder:  
-* */backend* - backend Mini App - It is responsible for storing and receiving exchange rates from the supplier and implements an API for receiving rates by the Mini App frontend.
-* */webapp* - frontend Mini App
-* */bot* - backend bot: processes updates (user requests) of the bot.
+Проект состоит из трех основных сервисов, каждый из которых находитится в соответствующей папке:  
+* */backend* - backend мини-приложения - отвечает за хранение и получение курсов валют от поставщика и реализует API для получения курсов фронтендом мини-приложения.
+* */webapp* - frontend мини-приложения
+* */bot* - backend бота: обрабатывает обновления (запросы пользователя) бота. 
 
-The *config* folder contains the service configuration files.  
-The *data* folder is used to store the redis database on disk.
+Папка *config* содержит файлы конфигурации сервисов.  
+Папка *data* используется для хранения базы данных redis на диске.
 
-## Technical features of the project
+## Технические особенности проекта
 
-To store the exchange rates received from the supplier, [Redis][redis] is used.
-[Nginx][nginx] is used as a web server for sending static Mini App files and [reverse proxy server][reverse_proxy].  
+Для хранения курсов валют, полученных от поставщика используется [Redis][redis].
+В качестве веб-сервера для отдачи статических файлов мини-приложения и [обратного прокси-сервера][reverse_proxy] используется [Nginx][nginx].  
 
-Services run in [docker][docker] containers. Docker is a platform for creating, deploying and managing containers. Containers allow you to package an application and all its dependencies into a single executable environment.  
-Docker containers are managed using [Docker Compose][docker_compose]. Docker Compose makes it easy to set up and combine services together and launch an application with a single command. Docker Compose configuration file: docker-compose.yml ([documentation][compose_config]).  
+Сервисы запускаются в [docker][docker] контейнерах. Docker - это платформа для создания, развертывания и управления контейнерами. Контейнеры позволяют упаковать приложение и все его зависимости в единое исполняемое окружение.  
+Управление docker контейнерами осуществляется с помощью [Docker Compose][docker_compose]. Docker Compose позволяет легко настроить и объекдинить сервисы вместе и запустить приложение одной командой. Файл конфигурации Docker Compose: docker-compose.yml ([документация][compose_config]). 
 
-To create a mini-application with Telegram, it must be hosted on a domain with an SSL certificate. This guide does not cover the steps to obtain a certificate. You can use the free letsencrypt certificate.
+Для интеграции мини-приложения с Telegram нужно, чтобы оно размещалось на домене с ssl сертификатом. В данном руководстве не затрагиваются этапы получения сертификата. Вы можете использовать бесплатный сертификат от letsencrypt.
 
 ---
 
-## Installation and launch  
+## Установка и запуск
 
-Make sure you have the following installed:  
+Убедитесь, что у вас установлено следующее:  
 * Git ([install][git_download])
 * Docker (v24.0.6)* ([install][install_docker])
 * Docker Compose (v2.21.0)*
 
-*version used during development
+*версия, используемая при разработке  
 
-1. Clone the repository:
+1. Клонируйте репозиторий:
 
     ```shell
         git clone https://github.com/kr-ilya/currency-converter.git
     ```
-2. Go to the project folder  
+2. Перейдите в папку с проектом  
 
     ```shell
         cd currency-converter
     ```
 
-3. Configuring the configuration
+3. Настройка конфигурации
 
-The main configuration of the project is set by editing files in the config folder.  
-Folder contents:
-* /nginx - contains nginx configuration file (reverse proxy)
-* /redis - contains redis configuration file
-* backend.env - backend Mini App configuration file 
-* bot.env - bot's backend configuration file
+Основная конфигурация проекта задается путем редактирования файлов в папке config.  
+Содержимое папки:  
+* /nginx - содержит файл конфигурации nginx (reverse proxy)
+* /redis - содержит файл конфигруации redis
+* backend.env - файл конфигурации backend мини-приложения 
+* bot.env - файл конфигурации backend бота
 
-In addition, in the file */webapp/src/js/app.js* it is necessary to specify the URL of the API server (backend Mini App) (link of the type: https://example.com/api).
+Кроме этого в файле */webapp/src/js/app.js* необходимо указать URL адрес API сервера (backend мини-приложения) (ссылка вида:  https://example.com/api).
 
 ### bot.env
 
-*Parameters required for installation:*    
+*Параметры, обязательные к установке:*    
 
-**BOT_TOKEN** - Telegram bot token 
+**BOT_TOKEN** - токен Telegram бота
 
-**WEBHOOK_BASE** - The URL for the webhook server, the address should look like "scheme://host", for example: https://example.com  
+**WEBHOOK_BASE** - URL адрес для webhook сервера, адрес должен иметь вид "scheme://host", например: https://example.com  
 
-**WEBAPP_URL** - Mini App URL (link to the main page, matches with *WEBHOOK_BASE*)
+**WEBAPP_URL** - URL адрес мини-приложения (ссылка на главную, совпадает с *WEBHOOK_BASE*)
 
 <details>
-<summary>Parameters that can be left by default</summary> 
+<summary>Параметры, которые можно оставить по умолчанию</summary> 
 
-**LOGGER_TYPE** - type of logging (prod/dev)  
+**LOGGER_TYPE** - тип логирования (prod/dev)  
 
-**LISTEN_ADDRESS** - the address with the webhook port of the bot server.  
-When changing, also change the port in the /config/nginx/nginx.conf file. (in the *upstream bot* section) 
+**LISTEN_ADDRESS** - адрес с портом webhook сервера бота.  
+При изменении также изменить порт в файле /config/nginx/nginx.conf. (в разделе *upstream bot*)  
 
 </details>
 
 ### backend.env  
 
-*Parameters required for installation:*  
+*Параметры, обязательные к установке:*  
 
-**FIXER_ACCESS_TOKEN** - API token of the service for obtaining exchange rates ([fixer][fixer])  
+**FIXER_ACCESS_TOKEN** - API токен сервиса для получения курсов валют ([fixer][fixer])  
 
-**REDIS_PASS** - password to the redis database (also specify in the /redis/redis.conf file, the *requirepass* parameter)
+**REDIS_PASS** - пароль к базе redis (также указать в файле /redis/redis.conf, параметр *requirepass*)
 
-**BOT_TOKEN** - Telegram bot token
+**BOT_TOKEN** - токен Telegram бота
 
 <details>
-<summary>Parameters that can be left by default</summary> 
+<summary>Параметры, которые можно оставить по умолчанию</summary> 
 
-**LISTEN_ADDRESS** - the address with the backend port of the bot server.  
-When changing, also change the port in the /config/nginx/nginx.conf file. (in the *upstream api* section)
+**LISTEN_ADDRESS** - адрес с портом backend сервера бота.  
+При изменении также изменить порт в файле /config/nginx/nginx.conf. (в разделе *upstream api*)
 
-**LOGGER_TYPE** - logging type (prod/dev)  
+**LOGGER_TYPE** - тип логирования (prod/dev)  
 
-**REDIS_DB=0** - redis database number  
+**REDIS_DB=0** - номер базы данных redis  
 
-**REDIS_HOST** - redis host (corresponds to the name of the service from docker-compose.yml)
+**REDIS_HOST** - хост redis (соответствует названию сервиса из docker-compose.yml)
 
-**REDIS_PORT** - redis port (also specify the *port* parameter in the /redis/redis.conf file)
+**REDIS_PORT** - порт redis (также указать в файле /redis/redis.conf, параметр *port*)
 </details>
 
-### Redis Configuration  
+### Конфигруация Redis
 
-Configuration file: /redis/redis.conf  
-[Description of the Redis configuration file][redis_config]
+Файл конфигурации: /redis/redis.conf  
+[Описание конфигурационного файла Redis][redis_config]
 
-It is required to specify:  
-**requirepass** - password to the redis database
+Требуется указать:  
+**requirepass** - пароль к базе redis
 
-### nginx configuration
+### Конфигурация nginx
 
-Configuration file: /config/nginx.conf  
-[Nginx Documentation][nginx_docs]  
+Файл конфигурации: /config/nginx.conf  
+[Документация Nginx][nginx_docs]  
 
-In the file, you must specify:
+В файле необходимо указать:  
 * server_name  
 * ssl_certificate  
 * ssl_certificate_key
 
 
 
-4. Launch  
+4. Запуск  
 
 ```shell
     docker compose up
@@ -155,6 +158,7 @@ In the file, you must specify:
 [redis_config]: https://redis.io/docs/management/config-file/
 [nginx_docs]: https://nginx.org/en/docs/
 [compose_config]: https://docs.docker.com/compose/compose-file/03-compose-file/
-[miniapp_docs]: ./miniapp_en.md
-[backend_docs]: ./backend_en.md
-[bot_docs]: ./bot_en.md
+[miniapp_docs]: ./miniapp_ru.md
+[backend_docs]: ./backend_ru.md
+[bot_docs]: ./bot_ru.md
+[docs_en]: ./readme_en.md
