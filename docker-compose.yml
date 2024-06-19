@@ -5,7 +5,7 @@ services:
     container_name: bot
     build:
       context: ./bot
-      dockerfile: ./Dockerfile
+      dockerfile: ./bot/Dockerfile
     restart: unless-stopped
     logging:
       driver: "json-file"
@@ -21,7 +21,7 @@ services:
     container_name: backend
     build:
       context: ./backend
-      dockerfile: ./Dockerfile
+      dockerfile: ./backend/Dockerfile
     restart: unless-stopped
     logging:
       driver: "json-file"
@@ -52,7 +52,7 @@ services:
     restart: unless-stopped
     build:
       context: ./webapp
-      dockerfile: ./Dockerfile
+      dockerfile: ./webapp/Dockerfile
     networks:
       - app_nw
   
